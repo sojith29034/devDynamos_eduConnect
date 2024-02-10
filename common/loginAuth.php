@@ -38,21 +38,21 @@ if(isset($_POST['userID']) && isset($_POST['pwd'])){
                 $_SESSION['uname']=$row['uname'];
                 $_SESSION['uid']=$row['uid'];
                 $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:./teacher.php");
+                header("Location:../teacher/teacher.php");
                 exit();
             }
             else if($row['role']=='Student' && $row['uid']==$uid && $row['pw']==$pwd){
                 $_SESSION['uname']=$row['uname'];
                 $_SESSION['uid']=$row['uid'];
                 $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:./student.php");
+                header("Location:../student/student.php");
                 exit();
             }
             else if($row['role']=='NGO' && $row['uid']==$uid && $row['pw']==$pwd){
                 $_SESSION['uname']=$row['uname'];
                 $_SESSION['uid']=$row['uid'];
                 $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:./ngo.php");
+                header("Location:../ngo/ngo.php");
                 exit();
             }
             else{

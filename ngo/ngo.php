@@ -1,7 +1,9 @@
 <?php
-require 'connect.php';
+require '../common/connect.php';
 
 session_start();
+
+require '../common/links.php';
 ?>
 
 <!DOCTYPE html>

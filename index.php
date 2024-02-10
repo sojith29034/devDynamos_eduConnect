@@ -1,4 +1,4 @@
-<?php include './links.php' ?>
+<?php include './common/links.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <form action="./loginAuth.php" method="post">
+                <form action="./common/loginAuth.php" method="post">
                     <h1 class="text-center p-3">LOGIN</h1>
 
                     <?php
