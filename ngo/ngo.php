@@ -14,6 +14,17 @@ require '../common/links.php';
     <title>NGO | <?=$_SESSION['uname']?></title>
 </head>
 <body>
-    
+    <?php include '../common/navbar.php' ?>
+    <?php include '../common/message.php' ?>
+
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header"><h3>Hunt Teachers?</h3></div>
+            <div class="card-body">
+                <p>Post teaching opportunities and connect with passionate educators. Build a brighter future together.</p>
+                <a href="./teacherHunt.php" class="btn btn-primary">Hunt now</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
