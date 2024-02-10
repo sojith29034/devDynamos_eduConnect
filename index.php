@@ -24,7 +24,7 @@
                         <label for="userID" class="form-label">User ID:</label>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-id-badge"></i></span>
-                            <input type="text" name="userID" id="userID" class="form-control" placeholder="User ID" aria-label="User ID" aria-describedby="addon-wrapping">
+                            <input autofocus type="text" name="userID" id="userID" class="form-control" placeholder="User ID" aria-label="User ID" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="px-5 py-2">

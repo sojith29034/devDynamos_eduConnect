@@ -19,11 +19,11 @@ if(isset($_POST['userID']) && isset($_POST['pwd'])){
     $pwd = validate($_POST["pwd"]);
 
     if(empty($uid)){
-        header("Location:./index.php?error=User ID Required.");
+        header("Location:../index.php?error=User ID Required.");
         exit();
     }
     else if(empty($pwd)){
-        header("Location:./index.php?error=Password Required.");
+        header("Location:../index.php?error=Password Required.");
         exit();
     }
     else{
@@ -56,18 +56,18 @@ if(isset($_POST['userID']) && isset($_POST['pwd'])){
                 exit();
             }
             else{
-                header("Location:./index.php?error=Incorrect User ID or Password.");
+                header("Location:../index.php?error=Incorrect User ID or Password.");
                 exit();
             }
         }
         else{
-            header("Location:./index.php?error=Incorrect User ID or Password.");
+            header("Location:../index.php?error=Incorrect User ID or Password.");
             exit();
         }
     }
 }
 else{
-    header("Location:./index.php");
+    header("Location:../index.php");
     exit();
 }
 ?>
