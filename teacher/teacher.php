@@ -24,7 +24,7 @@ require '../common/links.php';
                     <div class="card-header"><h3>My Classroom</h3></div>
                     <div class="card-body">
                         <a href="scheduleClass.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Schedule Class</a>
-                        <a href="scheduleClass.php" class="btn btn-primary">View Scheduled Classes</a>
+                        <a href="viewScheduled.php" class="btn btn-primary">View Scheduled Classes</a>
                     </div>
                 </div>
             </div>
