@@ -27,12 +27,13 @@ require '../common/links.php';
                         <div class="card-body row">
                             <div class="col-md-4">
                                 <input type="hidden" name="name" id="name" value="<?=$_SESSION['uname']?>">
-                                <input type="hidden" name="userLink" id="userLink" value="<?=$_SESSION['userLink']?>">
 
                                 <label for="meetDate" class="form-label">Class Date: </label>
                                     <input type="text" name="meetDate" id="meetDate" class="form-control" placeholder="Eg: 1st January, 2024" autofocus>
                             </div>
                             <div class="col-md-4">
+                                <input type="hidden" name="userLink" id="userLink" value="<?=$_SESSION['userLink']?>">
+                                
                                 <label for="meetTime" class="form-label">Class Time: </label>
                                     <input type="text" name="meetTime" id="meetTime" class="form-control" placeholder="Eg: 4:30 PM (IST)">
                             </div>

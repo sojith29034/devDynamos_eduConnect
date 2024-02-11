@@ -26,5 +26,13 @@ require '../common/links.php';
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-body">
+                <?php include '../html/map.php' ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
