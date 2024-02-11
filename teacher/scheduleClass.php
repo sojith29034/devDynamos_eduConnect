@@ -46,7 +46,7 @@ require '../common/links.php';
                                     <input type="text" name="meetTopic" id="meetTopic" class="form-control" placeholder="Eg: Mathematics" autofocus>
                             </div>
                             <div class="col-md-6 my-4">
-                                <label for="meetLink" class="form-label">Class Link: </label> <a target="_blank" href="https://meet.google.com/" class="btn btn-sm btn-primary">Schedule now</a>
+                                <label for="meetLink" class="form-label">Class Link: </label> <a target="_blank" href="https://calendar.google.com/calendar/u/0/r" class="btn btn-sm btn-primary">Schedule now</a>
                                     <input type="text" name="meetLink" id="meetLink" class="form-control" placeholder="Eg: https://meet.google.com/abc-def-ghi">
                             </div>
                             <div class="col-md-12">
