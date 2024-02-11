@@ -20,9 +20,9 @@ require '../common/links.php';
 
   <?php include '../common/message.php' ?>
 
-  <div class="container z-11 w-100 h-100 d-flex justify-content-center align-items-center">
+  <div class="container z-11 d-flex justify-content-center align-items-center">
     <div class="row">
-      <p id="quote"></p>
+      <h1 id="quote"></h1>
     </div>
   </div>
 </body>
