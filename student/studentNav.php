@@ -12,12 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="classroom.php">CLASSROOM</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">NOTES</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">MATERIALS</a>
-                </li>
             </ul>
         </div>
     </div>
