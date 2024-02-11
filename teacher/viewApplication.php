@@ -33,7 +33,7 @@ if(isset($_SESSION['uid']))
             ?>
             <div class="card">
                 <div class="card-header text-bg-primary">
-                    <h3 class="text-center"><?=$post['actName']?> (<?=$post['actID']?>)</h3>
+                    <h3 class="text-center"><?=$post['actName']?> (<span id="actID"><?=$post['actID']?></span>)</h3>
                 </div>
                 <div class="card-body">
                     <div class="card text-start">
@@ -90,53 +90,57 @@ if(isset($_SESSION['uid']))
 
 
                 <div class="card-footer text-center">
-                    <?php if ($post['status'] == 'accepted' || $post['status'] == 'Accepted'): ?>
-                        <h2 class="text-success">This post application has been accepted.</h2>
-                    <?php elseif ($post['status'] == 'rejected' || $post['status'] == 'Rejected'): ?>
-                        <h2 class="text-danger">This post application has been rejected.</h2>
-                    <?php elseif ($post['status'] == 'pending' || $post['status'] == 'Pending'): ?>
-                        <form action="../common/formActions.php" method="POST">
+                    <?php 
+                        $tname=$post['name'];
+                        $check = "SELECT * FROM huntstatus WHERE tname='$tname' AND actID='$actID'";
+                        $runCheck = mysqli_query($conn, $check);
 
-                            <input type="hidden" id="hiddenComments" name="hiddenComments" value="">
-                            
-                            <button type="button" class="btn btn-danger mx-5" data-bs-toggle="modal" data-bs-target="#rejectModal"><i class="fas fa-times"></i> Reject</button>
-                            <button type="button" class="btn btn-success mx-5" data-bs-toggle="modal" data-bs-target="#acceptModal"><i class="fas fa-check"></i> Accept</button>
+                        if(mysqli_num_rows($runCheck)<=0):
+                    ?>
+                        <form action="../common/postActions.php" method="POST">
+
+                            <h5 class="my-3">Interested to be a part of this? Click the button below to choose and connect accordingly!</h5>
+                            <button type="button" class="btn btn-success mx-5" data-bs-toggle="modal" data-bs-target="#onlineModal">Online Class</button>
+                            <button type="button" class="btn btn-success mx-5" data-bs-toggle="modal" data-bs-target="#offlineModal">Offline Class</button>
 
                             
-                            <!-- Reject Application Form Modal -->
-                            <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
+                            <!-- Online Class Modal -->
+                            <div class="modal fade" id="onlineModal" tabindex="-1" aria-labelledby="onlineLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="rejectLabel">Reject post Application</h1>
+                                            <h1 class="modal-title fs-5" id="onlineLabel">Online Class</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Are you sure you want to reject <?=$post['name']?>'s application?
-                                            <textarea class="form-control bg-warning-subtle my-2" name="comments" id="comments" row="2" 
-                                                    style="resize: none;" placeholder="Administrator comments for post . . ."></textarea>
+                                            Are you sure you want to opt to conduct online classes for <label><?=$post['name']?></label> ?
+                                            <textarea class="form-control bg-dark-subtle my-2" name="comments" id="comments" row="2" 
+                                                    style="resize: none;" placeholder="Talk to <?=$post['name']?>"></textarea>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary mx-5" data-bs-dismiss="modal">Cancel</button>
-                                            <a href="#" class="btn btn-danger mx-5" onclick="submitForm('R')">Reject</a>
+                                            <a href="#" class="btn btn-success mx-5" onclick="submitForm('on')">Yes, Confirm</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accept Application Form Modal -->
-                            <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptLabel" aria-hidden="true">
+
+                            <!-- Offline Class Modal -->
+                            <div class="modal fade" id="offlineModal" tabindex="-1" aria-labelledby="offlineLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="acceptLabel">Accept post Application</h1>
+                                            <h1 class="modal-title fs-5" id="offlineLabel">Offline Class</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Are you sure you want to accept <?=$post['name']?>'s application?
+                                            Are you sure you want to opt to conduct offline classes for <label><?=$post['name']?></label> ?
+                                            <textarea class="form-control bg-dark-subtle my-2" name="comments" id="comments" row="2" 
+                                                    style="resize: none;" placeholder="Talk to <?=$post['name']?>"></textarea>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary mx-5" data-bs-dismiss="modal">Cancel</button>
-                                            <a href="#" class="btn btn-success mx-5" onclick="submitForm('A')">Accept</a>
+                                            <a href="#" class="btn btn-success mx-5" onclick="submitForm('off')">Yes, Confirm</a>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +165,8 @@ if(isset($_SESSION['uid']))
     <script>
         function submitForm(status) {
             const comments = document.getElementById('comments').value;
-            const url = `../common/formActions.php?name=<?=$post['name']?>&attempts=<?=$post['attempts']?>&status=${status}&comments=${comments}`;
+            const actID = document.getElementById('actID').value;
+            const url = `../common/postActions.php?name=<?=$post['name']?>&status=${status}&comments=${comments}&actID=<?=$actID?>`;
             window.location.href = url;
         }
     </script>

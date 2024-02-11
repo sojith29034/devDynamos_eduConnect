@@ -39,6 +39,37 @@ if (isset($_POST['submit'])) {
 
 
 <?php
+if (isset($_GET['status']) && isset($_GET['name'])) {
+    $status = ($_GET['status'] == 'on') ? "online" : "offline";
+    $name = $_GET['name'];
+    $actID = $_GET['actID'];
+    $comments = $_GET['comments'];
+    
+    if (!$conn) {
+        echo "Connection failed";
+    } else {
+        $query = "INSERT INTO `huntstatus` (`status`, `comments`, `tname`, `actID`) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ssss", $status, $comments, $name, $actID);
+            $query_run = mysqli_stmt_execute($stmt);
+
+            if ($query_run) {
+                header("Location:../teacher/teacher.php");
+                $_SESSION['message']="You have chosen to co-ordinate $status with $name.";
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error in prepared statement: " . mysqli_error($conn);
+        }
+    }
+}
+?>
+
+<?php
 }
 else{
     header("Location:../index.php");
