@@ -19,7 +19,38 @@ require '../common/links.php';
   <?php include '../student/studentNav.php' ?>
 
   <?php include '../common/message.php' ?>
+
+  <div class="container z-11 w-100 h-100 d-flex justify-content-center align-items-center">
+    <div class="row">
+      <p id="quote"></p>
+    </div>
+  </div>
 </body>
+
+
+<script>
+const quotes = [
+    "The only way to do great work is to love what you do. - Steve Jobs",
+    "Innovation distinguishes between a leader and a follower. - Steve Jobs",
+    "Your time is limited, don't waste it living someone else's life. - Steve Jobs",
+    "Stay hungry, stay foolish. - Steve Jobs",
+    "Life is what happens when you're busy making other plans. - John Lennon",
+    "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill"
+];
+function generateQuote() 
+{
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const randomQuote = quotes[randomIndex];
+    document.getElementById('quote').textContent = randomQuote;
+}
+
+window.addEventListener('load', generateQuote);
+
+generateQuote();
+
+</script>
+
 
 <style>
   img.bg{

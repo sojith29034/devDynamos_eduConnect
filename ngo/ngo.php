@@ -29,6 +29,9 @@ require '../common/links.php';
 
     <div class="container">
         <div class="card mt-5">
+            <div class="card-header">
+                <h2>Search for places here . . .</h2>
+            </div>
             <div class="card-body">
                 <?php include '../html/map.php' ?>
             </div>
