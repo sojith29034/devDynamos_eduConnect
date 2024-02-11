@@ -4,3 +4,6 @@
 
 <!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/0a95f6b081.js" crossorigin="anonymous"></script>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="../common/style.css">

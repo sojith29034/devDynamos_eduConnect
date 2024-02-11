@@ -37,6 +37,7 @@ if(isset($_POST['userID']) && isset($_POST['pwd'])){
             if($row['role']=='Teacher' && $row['uid']==$uid && $row['pw']==$pwd){
                 $_SESSION['uname']=$row['uname'];
                 $_SESSION['uid']=$row['uid'];
+                $_SESSION['userLink']=$row['userLink'];
                 $_SESSION['loginMessage']="Logged in Successfully";
                 header("Location:../teacher/teacher.php");
                 exit();

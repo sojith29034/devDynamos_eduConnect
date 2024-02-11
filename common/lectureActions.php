@@ -17,12 +17,13 @@ if (isset($_POST['schedule'])) {
     $meetTopic = mysqli_real_escape_string($conn, $_POST['meetTopic']);
     $meetLink = mysqli_real_escape_string($conn, $_POST['meetLink']);
     $meetDetails = mysqli_real_escape_string($conn, $_POST['meetDetails']);
+    $userLink = mysqli_real_escape_string($conn, $_POST['userLink']);
 
-    $query = "INSERT INTO `classSchedule` (`name`, `meetDate`, `meetTime`, `meetDuration`, `meetTopic`, `meetLink`, `meetDetails`) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO `classSchedule` (`name`, `meetDate`, `meetTime`, `meetDuration`, `meetTopic`, `meetLink`, `meetDetails`, `userLink`) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "sssssss", $name, $meetDate, $meetTime, $meetDuration, $meetTopic, $meetLink, $meetDetails);
+    mysqli_stmt_bind_param($stmt, "ssssssss", $name, $meetDate, $meetTime, $meetDuration, $meetTopic, $meetLink, $meetDetails, $userLink);
 
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['successMessage']="Class has been Scheduled Successfully!";
