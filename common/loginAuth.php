@@ -5,8 +5,44 @@ session_start();
 ?>
 
 
+
+<!---------------------------------- User Register ----------------------------------->
 <?php
-if(isset($_POST['userID']) && isset($_POST['pwd'])){
+    $uid = $_POST["userID"];
+    $role = $_POST["role"];
+    $pw = $_POST["pwd"];
+    $rpw = $_POST["rpwd"];
+
+    if(empty($uid)){
+        header("Location:../register.php?error=User ID Required.");
+        exit();
+    }
+    else if(empty($pw)){
+        header("Location:../register.php?error=Password Required.");
+        exit();
+    }
+    else if(empty($rpw)){
+        header("Location:../register.php?error=Repeat Password.");
+        exit();
+    }
+    else{
+        $stmt = $conn->prepare("insert into login(uid, role, pw, rpw)
+        values (?, ?, ?, ?)");
+        $stmt->bind_param("ssss",$uid,$role,$pw,$rpw);
+        $stmt->execute();
+        // header("Location:user.php");
+        echo 'User added';
+        exit();
+        $stmt->close();
+        $conn->close();
+    }
+?>
+<!-----------------X---------------- User Register ----------------X------------------>
+
+
+<!---------------------------------- User Login ----------------------------------->
+<?php
+if(isset($_POST['login']) && isset($_POST['userID']) && isset($_POST['pwd'])){
     function validate($data)
     {
         $data = trim($data);
@@ -73,3 +109,4 @@ else{
     exit();
 }
 ?>
+<!-----------------X---------------- User Login ----------------X------------------>
