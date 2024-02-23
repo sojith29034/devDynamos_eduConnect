@@ -32,14 +32,21 @@
                         <?php
                         }
                     ?>
-                    <div class="px-5 py-2">
+                    <div class="px-5 py-1">
+                        <label for="uname" class="form-label">Username:</label>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-id-badge"></i></span>
+                            <input autofocus type="text" name="uname" id="uname" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                    <div class="px-5 py-1">
                         <label for="userID" class="form-label">User ID:</label>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-id-badge"></i></span>
                             <input autofocus type="text" name="userID" id="userID" class="form-control" placeholder="User ID" aria-label="User ID" aria-describedby="addon-wrapping">
                         </div>
                     </div>
-                    <div class="px-5 py-2">
+                    <div class="px-5 py-1">
                         <label for="role" class="form-label">Select User Role:</label>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-user"></i></span>
@@ -50,24 +57,24 @@
                             </select>
                         </div>
                     </div>
-                    <div class="px-5 py-2">
+                    <div class="px-5 py-1">
                         <label for="pwd" class="form-label">Password:</label>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-lock"></i></span>
                             <input type="password" name="pwd" id="pwd"  class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping">
                         </div>
                     </div>
-                    <div class="px-5 py-2">
+                    <div class="px-5 py-1">
                         <label for="rpwd" class="form-label">Re-enter Password:</label>
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-lock"></i></span>
                             <input type="password" name="rpwd" id="rpwd"  class="form-control" placeholder="Re-enter Password" aria-label="Password" aria-describedby="addon-wrapping">
                         </div>
                     </div>
-                    <div class="d-grid g-3 col-6 mx-auto my-3">
+                    <div class="d-grid g-3 col-6 mx-auto my-2">
                         <button type="submit" class="btn btn-primary" name="register">Register</button>
                     </div>
-                    <div class="d-grid g-3 col-12 mx-auto my-3">
+                    <div class="d-grid g-3 col-12 mx-auto my-2">
                         <p class="text-center">Account already exists? <a href="./index.php">Login Now!</a></p>
                     </div>
                 </form>

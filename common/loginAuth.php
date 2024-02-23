@@ -8,34 +8,45 @@ session_start();
 
 <!---------------------------------- User Register ----------------------------------->
 <?php
-    $uid = $_POST["userID"];
-    $role = $_POST["role"];
-    $pw = $_POST["pwd"];
-    $rpw = $_POST["rpwd"];
+    if(isset($_POST['register'])):
+        $uname = $_POST["uname"];
+        $uid = $_POST["userID"];
+        $role = $_POST["role"];
+        $pw = $_POST["pwd"];
+        $rpw = $_POST["rpwd"];
 
-    if(empty($uid)){
-        header("Location:../register.php?error=User ID Required.");
-        exit();
-    }
-    else if(empty($pw)){
-        header("Location:../register.php?error=Password Required.");
-        exit();
-    }
-    else if(empty($rpw)){
-        header("Location:../register.php?error=Repeat Password.");
-        exit();
-    }
-    else{
-        $stmt = $conn->prepare("insert into login(uid, role, pw, rpw)
-        values (?, ?, ?, ?)");
-        $stmt->bind_param("ssss",$uid,$role,$pw,$rpw);
-        $stmt->execute();
-        // header("Location:user.php");
-        echo 'User added';
-        exit();
-        $stmt->close();
-        $conn->close();
-    }
+        if(empty($uname)){
+            header("Location:../register.php?error=Username Required.");
+            exit();
+        }
+        else if(empty($uid)){
+            header("Location:../register.php?error=User ID Required.");
+            exit();
+        }
+        else if(empty($pw)){
+            header("Location:../register.php?error=Password Required.");
+            exit();
+        }
+        else if(empty($rpw)){
+            header("Location:../register.php?error=Repeat Password.");
+            exit();
+        }
+        else{
+            $stmt = $conn->prepare("insert into login(uname, uid, role, pw, rpw)
+            values (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss",$uname,$uid,$role,$pw,$rpw);
+            $stmt->execute();
+            if($role=='Student'){
+                header('location: ../student/index.php');}
+            else if($role=='Teacher'){
+                header('location: ../teacher/index.php');}
+            else if($role=='NGO'){
+                header('location: ../ngo/index.php');}
+            exit();
+            $stmt->close();
+            $conn->close();
+        }
+    endif;
 ?>
 <!-----------------X---------------- User Register ----------------X------------------>
 
@@ -64,7 +75,6 @@ if(isset($_POST['login']) && isset($_POST['userID']) && isset($_POST['pwd'])){
     }
     else{
         $sql = "SELECT * FROM login WHERE uid='$uid' AND pw='$pwd'";
-
         $result = mysqli_query($conn,$sql);
 
         if(mysqli_num_rows($result)==1){
@@ -76,7 +86,15 @@ if(isset($_POST['login']) && isset($_POST['userID']) && isset($_POST['pwd'])){
                 $userLink=$row['userLink'];
                 $_SESSION['userLink']=$userLink;
                 $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:../teacher/teacher.php");
+                
+                $details = "SELECT * FROM teachers WHERE uid='$uid'";
+                $run_details = mysqli_query($conn, $details);
+                if(mysqli_num_rows($run_details) == 1):
+                    $teacher_row = mysqli_fetch_assoc($run_details);
+                    header("Location:../teacher/teacher.php");
+                else:
+                    header("Location:../teacher/");
+                endif;
                 exit();
             }
             else if($row['role']=='Student' && $row['uid']==$uid && $row['pw']==$pwd){
@@ -91,6 +109,13 @@ if(isset($_POST['login']) && isset($_POST['userID']) && isset($_POST['pwd'])){
                 $_SESSION['uid']=$row['uid'];
                 $_SESSION['loginMessage']="Logged in Successfully";
                 header("Location:../ngo/ngo.php");
+                exit();
+            }
+            else if($row['role']=='Administrator' && $row['uid']==$uid && $row['pw']==$pwd){
+                $_SESSION['uname']=$row['uname'];
+                $_SESSION['uid']=$row['uid'];
+                $_SESSION['loginMessage']="Logged in Successfully";
+                header("Location:../admin/admin.php");
                 exit();
             }
             else{
