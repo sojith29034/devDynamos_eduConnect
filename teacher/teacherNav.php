@@ -7,10 +7,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="./student.php">HOME</a>
+                    <a class="nav-link" href="./teacher.php">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="classroom.php">CLASSROOM</a>
+                    <a class="nav-link" href="./ngoApplication.php">NGO APPLICATIONS</a>
                 </li>
             </ul>
         </div>

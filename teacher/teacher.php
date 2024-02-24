@@ -70,63 +70,44 @@ require '../common/links.php';
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header"><h3>My Classroom</h3></div>
-                        <div class="card-body">
-                            <a href="scheduleClass.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Schedule Class</a>
-                            <a href="viewScheduled.php" class="btn btn-primary">View Scheduled Classes</a>
+                        <div class="card-header d-flex">
+                            <h3 class="col-md-2">My Classes</h3>
+                            <div class="col-md-2"><a href="scheduleClass.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Schedule Class</a></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header"><h3>NGO Applications</h3></div>
-                        <div class="card-body overflow-x-auto">
-                            <table class="table table-striped table-responsive">
-                                <thead class="my-2">
-                                    <tr class="text-center">
-                                        <th>Sr. No.</th>
-                                        <th>Name of NGO</th>
-                                        <th>Activity ID</th>
-                                        <th>Activity Name</th>
-                                        <th>Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $query = "SELECT * FROM teacherhunt";
-                                    $query_run = mysqli_query($conn, $query);
+                        <div class="card-body">
+                        <?php
+                        if (isset($_SESSION['uname'])) {
+                            $name = mysqli_real_escape_string($conn, $_SESSION['uname']);
+                            $query = "SELECT * FROM classschedule WHERE name='$name'";
+                            $result = mysqli_query($conn, $query);
 
-                                    $i = 1;
-                                    if (mysqli_num_rows($query_run) > 0) {
-                                        foreach ($query_run as $post) {
-                                    ?>
-
-                                    <tr class="text-center">
-                                        <td><?=$i?></td>
-                                        <td><?=$post['name']?></td>
-                                        <td><?=$post['actID']?></td>
-                                        <td><?=$post['actName']?></td>
-                                        <td><?=$post['actDate']?></td>
-                                        <td>
-                                            <a href="./viewApplication.php?actID=<?=$post['actID']?>" class="btn btn-primary"><i class="far fa-eye"> </i> View</a>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                            $i++;
-                                        }
-                                    } else {
-                                        echo "<div class='alert alert-warning' role='alert'>
-                                            No Applications Submitted.
-                                            </div>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                            if(mysqli_num_rows($result)>0){
+                                $class = mysqli_fetch_array($result);
+                                foreach ($result as $class) { 
+                        ?>
+                            <div class="card my-3">
+                                <div class="card-body row">
+                                    <div class="col-md-6">
+                                        <p><span class="fw-bold">Topic: </span><?=$class['meetTopic']?></p>
+                                        <p class="text-truncate"><span class="fw-bold">Details: </span><?=$class['meetDetails']?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><span class="fw-bold">Date: </span><?=$class['meetDate']?></p>
+                                        <p ><span class="fw-bold">Time: </span><?=$class['meetTime']?></p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="<?=$class['meetLink']?>" target="_blank" class="btn btn-outline-primary">Google Meet Link</a> (<?=$class['meetLink']?>)
+                                </div>
+                            </div>
+                        <?php
+                                }
+                            }
+                            else{
+                                echo "No classes have been scheduled yet. <a href='./scheduleClass.php' class='btn-primary'>Schedule your class now</a>";
+                            }
+                        }
+                        ?>
                         </div>
                     </div>
                 </div>
@@ -155,4 +136,3 @@ require '../common/links.php';
 
 </body>
 </html>
-

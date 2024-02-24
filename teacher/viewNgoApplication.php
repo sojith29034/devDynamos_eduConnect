@@ -19,7 +19,7 @@ if(isset($_SESSION['uid']))
   </head>
   <body>
     <div class="container mt-3 mb-5">
-        <a class="btn btn-dark text-end mb-4" href="../teacher/teacher.php"><i class="fas fa-chevron-left"></i> Go back</a>
+        <a class="btn btn-dark text-end mb-4" href="../teacher/ngoApplication.php"><i class="fas fa-chevron-left"></i> Go back</a>
         <div class="row">
             <div class="col-12">
             <?php
@@ -95,7 +95,7 @@ if(isset($_SESSION['uid']))
                         $check = "SELECT * FROM huntstatus WHERE tname='$tname' AND actID='$actID'";
                         $runCheck = mysqli_query($conn, $check);
 
-                        if(mysqli_num_rows($runCheck)<=0):
+                        if(mysqli_num_rows($runCheck)<=0){
                     ?>
                         <form action="../common/postActions.php" method="POST">
 
@@ -146,7 +146,20 @@ if(isset($_SESSION['uid']))
                                 </div>
                             </div>
                         </form>
-                    <?php endif; ?>
+                    <?php 
+                        } else{ 
+                            $procedure = mysqli_fetch_assoc($runCheck);
+                            if($procedure['status'] == "online"){
+                    ?>
+                        <a href="#" class="btn btn-primary mt-3">Schedule Online Class</a>
+                    <?php 
+                            } elseif($procedure['status'] == "offline"){
+                    ?>
+                        <a href="#" class="btn btn-primary mt-3">Schedule Offline Class</a>
+                    <?php
+                            }
+                        } 
+                    ?>
                 </div>
             </div>
             <?php

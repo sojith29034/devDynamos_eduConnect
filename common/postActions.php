@@ -56,7 +56,7 @@ if (isset($_GET['status']) && isset($_GET['name'])) {
             $query_run = mysqli_stmt_execute($stmt);
 
             if ($query_run) {
-                header("Location:../teacher/teacher.php");
+                header("Location:../teacher/ngoApplication.php");
                 $_SESSION['message']="You have chosen to co-ordinate $status with $name.";
             } else {
                 echo "Error: " . mysqli_error($conn);
