@@ -31,7 +31,7 @@ if (isset($_POST['submitTeacher'])) {
             VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = mysqli_prepare($conn, $query);
-            mysqli_stmt_bind_param($stmt, "sssssss", $uid, $uname, $sex, $qualifications, $qualFile, $subject, $past);
+            mysqli_stmt_bind_param($stmt, "sssssss", $uid, $uname, $sex, $qualifications, $qualFile_upload, $subject, $past);
 
             if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['successMessage']="Details added Successfully!";

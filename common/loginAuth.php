@@ -36,14 +36,30 @@ session_start();
             values (?, ?, ?, ?, ?)");
             $stmt->bind_param("sssss",$uname,$uid,$role,$pw,$rpw);
             $stmt->execute();
-            if($role=='Student'){
-                header('location: ../student/index.php');}
-            else if($role=='Teacher'){
-                header('location: ../teacher/index.php');}
-            else if($role=='NGO'){
-                header('location: ../ngo/index.php');}
-            exit();
             $stmt->close();
+
+            if($role=='Student'){
+                $_SESSION['uname']=$uname;
+                $_SESSION['uid']=$uid;
+                $_SESSION['loginMessage']="Logged in Successfully";
+                header("Location:../student/student.php");
+                exit();
+            }
+            else if($role=='Teacher'){
+                $_SESSION['uname']=$uname;
+                $_SESSION['uid']=$uid;
+                $_SESSION['loginMessage']="Logged in Successfully";
+                header("Location:../teacher/");
+                exit();
+            }
+            else if($role=='NGO'){
+                $_SESSION['uname']=$uname;
+                $_SESSION['uid']=$uid;
+                $_SESSION['loginMessage']="Logged in Successfully";
+                header("Location:../ngo/ngo.php");
+                exit();
+            }
+            exit();
             $conn->close();
         }
     endif;

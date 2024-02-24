@@ -53,7 +53,7 @@ require '../common/links.php';
                     </div>
                     
                     <div class="col-md-6">
-                      <label for="qualFile" class="form-label">Degree(s) (cumulative in .pdf format)</label>
+                      <label for="qualFile" class="form-label">Degree(s)/Certificates (cumulative in .pdf format)</label>
                         <input type="file" name="qualFile" id="qualFile" class="form-control" >
                     </div>
                     <div class="col-md-6">
