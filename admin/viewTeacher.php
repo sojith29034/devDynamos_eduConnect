@@ -20,6 +20,7 @@ require '../common/links.php';
     <?php include '../common/message.php' ?>
 
     <div class="container my-5">
+    <a class="btn btn-dark text-end mb-4" href="../admin/admin.php"><i class="fas fa-chevron-left"></i> Go back</a>
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -101,7 +102,7 @@ require '../common/links.php';
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="rejectLabel">Reject teacher Application</h1>
+                                        <h1 class="modal-title fs-5" id="rejectLabel">Reject teacher</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -120,7 +121,7 @@ require '../common/links.php';
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="approveLabel">Approve teacher Application</h1>
+                                        <h1 class="modal-title fs-5" id="approveLabel">Approve teacher</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

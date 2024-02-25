@@ -35,6 +35,19 @@ require '../common/links.php';
             </div>
         </div>
     <?php
+                } elseif ($row['status'] == "Rejected") {
+    ?>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        Your application has been rejected by the Administrator. You are not considered fit to be a teacher on EduConnect.
+                        <br>Thank you for your cooperation. Have a nice day.
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
                 } elseif ($row['status'] == "Approved") {
     ?>
         <?php include '../teacher/teacherNav.php' ?>

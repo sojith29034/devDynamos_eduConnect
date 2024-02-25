@@ -50,6 +50,41 @@ if (isset($_POST['submitTeacher'])) {
 ?>
 <!-----------------X---------------- Add teacher details ----------------X------------------>
 
+
+
+<!---------------------------------- Teacher Application Status ----------------------------------->
+<?php
+if (isset($_GET['status']) && isset($_GET['uname'])) {
+    $status = ($_GET['status'] == 'A') ? "Approved" : "Rejected";
+    $uname = $_GET['uname'];
+
+    if (!$conn) {
+        echo "Connection failed";
+    } else {
+        $query = "UPDATE teachers SET status=? WHERE uname=?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ss", $status, $uname);
+            $query_run = mysqli_stmt_execute($stmt);
+
+            if ($query_run) {
+                echo "Operation Successful: $status";
+                header("Location:../admin/admin.php");
+                $_SESSION['message']="$uname's application has been $status!";
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error in prepared statement: " . mysqli_error($conn);
+        }
+    }
+}
+?>
+<!-----------------X---------------- Teacher Application Status ----------------X------------------>
+
 <?php
 }
 else{
