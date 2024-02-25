@@ -41,22 +41,22 @@ session_start();
             if($role=='Student'){
                 $_SESSION['uname']=$uname;
                 $_SESSION['uid']=$uid;
-                $_SESSION['loginMessage']="Logged in Successfully";
+                $_SESSION['loginMessage']="Registration Successfully";
                 header("Location:../student/student.php");
                 exit();
             }
             else if($role=='Teacher'){
                 $_SESSION['uname']=$uname;
                 $_SESSION['uid']=$uid;
-                $_SESSION['loginMessage']="Logged in Successfully";
+                $_SESSION['loginMessage']="Registration Successfully";
                 header("Location:../teacher/");
                 exit();
             }
             else if($role=='NGO'){
                 $_SESSION['uname']=$uname;
                 $_SESSION['uid']=$uid;
-                $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:../ngo/ngo.php");
+                $_SESSION['loginMessage']="Registration Successfully";
+                header("Location:../ngo/");
                 exit();
             }
             exit();
@@ -124,7 +124,15 @@ if(isset($_POST['login']) && isset($_POST['userID']) && isset($_POST['pwd'])){
                 $_SESSION['uname']=$row['uname'];
                 $_SESSION['uid']=$row['uid'];
                 $_SESSION['loginMessage']="Logged in Successfully";
-                header("Location:../ngo/ngo.php");
+
+                $details = "SELECT * FROM ngos WHERE uid='$uid'";
+                $run_details = mysqli_query($conn, $details);
+                if(mysqli_num_rows($run_details) == 1):
+                    $ngo_row = mysqli_fetch_assoc($run_details);
+                    header("Location:../ngo/ngo.php");
+                else:
+                    header("Location:../ngo/");
+                endif;
                 exit();
             }
             else if($row['role']=='Administrator' && $row['uid']==$uid && $row['pw']==$pwd){

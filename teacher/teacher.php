@@ -17,7 +17,6 @@ require '../common/links.php';
     <?php include '../common/navbar.php' ?>
     <?php include '../common/message.php' ?>
 
-    <!-- Main Content -->
     <?php
         $sql = "SELECT status FROM teachers WHERE uname='$_SESSION[uname]'";
         $result = mysqli_query($conn, $sql);

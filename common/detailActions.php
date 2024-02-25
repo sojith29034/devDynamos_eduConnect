@@ -85,6 +85,68 @@ if (isset($_GET['status']) && isset($_GET['uname'])) {
 ?>
 <!-----------------X---------------- Teacher Application Status ----------------X------------------>
 
+
+
+<!---------------------------------- Add NGO details ----------------------------------->
+<?php
+if (isset($_POST['submitNgo'])) {
+    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+    $uname = mysqli_real_escape_string($conn, $_POST['uname']);
+    $mem_count = mysqli_real_escape_string($conn, $_POST['mem_count']);
+    $loc = mysqli_real_escape_string($conn, $_POST['loc']);
+    $mission = mysqli_real_escape_string($conn, $_POST['mission']);
+
+    $query = "INSERT INTO `ngos` ( `uid`, `uname`, `mem_count`, `loc`, `mission`) 
+    VALUES (?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "sssss", $uid, $uname, $mem_count, $loc, $mission);
+
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['successMessage']="Details added Successfully!";
+        header("Location:../ngo/ngo.php");
+    } else {
+        echo "Error: " . mysqli_stmt_error($stmt);
+    }
+}
+?>
+<!-----------------X---------------- Add NGO details ----------------X------------------>
+
+
+
+<!---------------------------------- NGO Application Status ----------------------------------->
+<?php
+if (isset($_GET['status']) && isset($_GET['uname'])) {
+    $status = ($_GET['status'] == 'A') ? "Approved" : "Rejected";
+    $uname = $_GET['uname'];
+
+    if (!$conn) {
+        echo "Connection failed";
+    } else {
+        $query = "UPDATE ngos SET status=? WHERE uname=?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ss", $status, $uname);
+            $query_run = mysqli_stmt_execute($stmt);
+
+            if ($query_run) {
+                echo "Operation Successful: $status";
+                header("Location:../admin/admin.php");
+                $_SESSION['message']="$uname's application has been $status!";
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error in prepared statement: " . mysqli_error($conn);
+        }
+    }
+}
+?>
+<!-----------------X---------------- NGO Application Status ----------------X------------------>
+
 <?php
 }
 else{

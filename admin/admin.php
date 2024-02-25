@@ -90,7 +90,7 @@ require '../common/links.php';
             <div class="col-12">
                 <div class="card">
                     <?php 
-                    $sql = "SELECT COUNT(*) as pending FROM teachers WHERE status='Pending'";
+                    $sql = "SELECT COUNT(*) as pending FROM ngos WHERE status='Pending'";
                     $result = mysqli_query($conn, $sql);
                     if ($result):
                         $row = mysqli_fetch_assoc($result);
@@ -114,10 +114,8 @@ require '../common/links.php';
                             <thead class="my-2">
                                 <tr class="text-center">
                                     <th>Sr. No.</th>
-                                    <th>Teacher Name</th>
-                                    <th>Subject</th>
-                                    <th>Qualifications</th>
-                                    <th>Past Experience</th>
+                                    <th>NGO Name</th>
+                                    <th>Members</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -128,9 +126,7 @@ require '../common/links.php';
                                 <tr class="text-center">
                                     <td><?=$i?></td>
                                     <td><?=$ngo['uname']?></td>
-                                    <td><?=$ngo['subject']?></td>
-                                    <td><?=$ngo['qualifications']?></td>
-                                    <td><?=$ngo['past']?></td>
+                                    <td><?=$ngo['mem_count']?></td>
                                     <td>
                                         <a href="./viewNgo.php?uname=<?=$ngo['uname']?>" class="btn btn-primary"><i class="far fa-eye"> </i> View</a>
                                     </td>

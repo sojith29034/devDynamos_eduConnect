@@ -145,7 +145,7 @@ require '../common/links.php';
     
     <script>
         function submitForm(status) {
-            const url = `../common/detailActions.php?uname=<?=$teacher['uname']?>&status=${status}`;
+            const url = `../common/detailActions.php?uname=<?=$teacher['uname']?>&status=${status}&role=teacher`;
             window.location.href = url;
         }
     </script>
